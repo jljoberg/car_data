@@ -83,7 +83,7 @@ def create_tf_example(group, path):
 def main(_):
     writer = tf.python_io.TFRecordWriter(FLAGS.output_path)
     path = os.path.join(os.getcwd(), 'images')
-    examples = pd.read_csv(FLAGS.csv_input)
+    examples = pd.read_csv(FLAGS.csv_input,error_bad_lines=False)
     grouped = split(examples, 'filename')
     for group in grouped:
         tf_example = create_tf_example(group, path)
